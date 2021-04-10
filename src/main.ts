@@ -9,10 +9,10 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-// declare const Office: any;
-Office.initialize = reason => {
-  // document.getElementById('sideload-msg').style.display = 'none';
-  console.log('office is initialized');
+
+Office.initialize = (_reason: any) => {
+  //If you need to initialize something you can do so here. 
+  console.log('ReleasePlanner addin - Office is initialized');
   // Bootstrap the app
   platformBrowserDynamic()
       .bootstrapModule(AppModule)

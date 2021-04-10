@@ -9,9 +9,9 @@
   <DisplayName DefaultValue="Test Sample" />
   <Description DefaultValue="Test Description" />
    <!--Icon for your add-in. Used on installation screens and the add-ins dialog -->
-  <IconUrl DefaultValue="http://localhost:4200/assets/icon-16.png" />
+  <IconUrl DefaultValue="https://localhost:4200/assets/icon-16.png" />
   <HighResolutionIconUrl DefaultValue="https://localhost:4200/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="[Insert the URL of a page that provides support information for the app]" />
+  <SupportUrl DefaultValue="https://www.microsoft.com" />
   <AppDomains>
     <!-- The task pane can access these exteral urls -->
     <AppDomain>https://www.microsoft.com</AppDomain>
@@ -23,7 +23,7 @@
     <Host Name="Workbook"/>
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="http://localhost:4200/index.html" />
+    <SourceLocation DefaultValue="https://localhost:4200/index.html" />
   </DefaultSettings>
   <!--EndTaskpaneMode integration -->
 
@@ -41,133 +41,131 @@
             Ensure you have build 16.0.6769 or above for GetStarted section to work-->
           <GetStarted>
 						<!--Title of the Getting Started callout. resid points to a ShortString resource -->
-						<Title resid="ReleasePlanner.GetStarted.Title"/>
+						<Title resid="RP.GetStarted.Title"/>
 						
 						<!--Description of the Getting Started callout. resid points to a LongString resource -->
-						<Description resid="ReleasePlanner.GetStarted.Description"/>
+						<Description resid="RP.GetStarted.Description"/>
 						
 						<!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL. 
 							resid points to a Url resource -->
-						<LearnMoreUrl resid="ReleasePlanner.GetStarted.LearnMoreUrl"/>
+						<LearnMoreUrl resid="RP.GetStarted.LearnMoreUrl"/>
 					</GetStarted>
           
         	<!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called. 
             Think of the FunctionFile as the "code behind" ExecuteFunction-->
-          <FunctionFile resid="ReleasePlanner.FunctionFile.Url" />
+          <FunctionFile resid="RP.FunctionFile.Url" />
 
           <!--PrimaryCommandSurface==Main Office Ribbon-->
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
           	<!--Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab -->
             <!-- Documentation includes all the IDs currently tested to work -->
-            <CustomTab id="ReleasePlanner.Tab1">
-				<!--Group ID-->
-              <Group id="ReleasePlanner.Tab1.Group1">
-              	 <!--Label for your group. resid must point to a ShortString resource -->
-                <Label resid="ReleasePlanner.Tab1.GroupLabel" />
+            <CustomTab id="RP.Tab1">
+              <!--Group ID-->
+              <Group id="RP.Tab1.Group1">
+                <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="RP.Tab1.GroupLabel" />
                 <Icon>
-                <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
-                <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
-                <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
-                  <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                  <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                  <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                  <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                  <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="RP.TaskpaneButton.Icon16" />
+                  <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
+                  <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
                 </Icon>
                 
                 <!--Control. It can be of type "Button" or "Menu" -->
-                <Control xsi:type="Button" id="ReleasePlanner.FunctionButton">
-                <!--Label for your button. resid must point to a ShortString resource -->
-                  <Label resid="ReleasePlanner.FunctionButton.Label" />
+                <Control xsi:type="Button" id="RP.FunctionButton">
+                  <!--Label for your button. resid must point to a ShortString resource -->
+                  <Label resid="RP.FunctionButton.Label" />
                   <Supertip>
-                  	 <!--ToolTip title. resid must point to a ShortString resource -->
-                    <Title resid="ReleasePlanner.FunctionButton.Label" />
-                     <!--ToolTip description. resid must point to a LongString resource -->
-                    <Description resid="ReleasePlanner.FunctionButton.Tooltip" />
+                    <!--ToolTip title. resid must point to a ShortString resource -->
+                    <Title resid="RP.FunctionButton.Label" />
+                    <!--ToolTip description. resid must point to a LongString resource -->
+                    <Description resid="RP.FunctionButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="ReleasePlanner.FunctionButton.Icon" />
-                    <bt:Image size="32" resid="ReleasePlanner.FunctionButton.Icon" />
-                    <bt:Image size="80" resid="ReleasePlanner.FunctionButton.Icon" />
+                    <bt:Image size="16" resid="RP.FunctionButton.Icon" />
+                    <bt:Image size="32" resid="RP.FunctionButton.Icon" />
+                    <bt:Image size="80" resid="RP.FunctionButton.Icon" />
                   </Icon>
                   <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFuncion or ShowTaskpane-->
                   <!--Look at the FunctionFile.html page for reference on how to implement the function -->
                   <Action xsi:type="ExecuteFunction">
-                  <!--Name of the function to call. This function needs to exist in the global DOM namespace of the function file-->
+                    <!--Name of the function to call. This function needs to exist in the global DOM namespace of the function file-->
                     <FunctionName>writeText</FunctionName>
                   </Action>
                 </Control>
 
-                <Control xsi:type="Button" id="ReleasePlanner.TaskpaneButton">
-                  <Label resid="ReleasePlanner.TaskpaneButton.Label" />
+                <Control xsi:type="Button" id="RP.TaskpaneButton">
+                  <Label resid="RP.TaskpaneButton.Label" />
                   <Supertip>
-                    <Title resid="ReleasePlanner.TaskpaneButton.Label" />
-                    <Description resid="ReleasePlanner.TaskpaneButton.Tooltip" />
+                    <Title resid="RP.TaskpaneButton.Label" />
+                    <Description resid="RP.TaskpaneButton.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="16" resid="RP.FunctionButton.Icon" />
+                    <bt:Image size="32" resid="RP.FunctionButton.Icon" />
+                    <bt:Image size="80" resid="RP.FunctionButton.Icon" />
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2Id1</TaskpaneId>
-                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="ReleasePlanner.Taskpane1.Url" />
+                      <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="RP.Taskpane1.Url" />
                   </Action>
                 </Control>
-            <!-- Menu example -->
-            <Control xsi:type="Menu" id="ReleasePlanner.Menu">
-              <Label resid="ReleasePlanner.Dropdown.Label" />
-              <Supertip>
-                <Title resid="ReleasePlanner.Dropdown.Label" />
-                <Description resid="ReleasePlanner.Dropdown.Tooltip" />
-              </Supertip>
-              <Icon>
-                <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
-              </Icon>
-              <Items>
-                <Item id="ReleasePlanner.Menu.Item1">
-                  <Label resid="ReleasePlanner.Item1.Label"/>
-                  <Supertip>
-                    <Title resid="ReleasePlanner.Item1.Label" />
-                    <Description resid="ReleasePlanner.Item1.Tooltip" />
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>MyTaskPaneID1</TaskpaneId>
-                    <SourceLocation resid="ReleasePlanner.Taskpane1.Url" />
-                  </Action>
-                </Item>
 
-                <Item id="ReleasePlanner.Menu.Item2">
-                  <Label resid="ReleasePlanner.Item2.Label"/>
+                <!-- Menu example -->
+                <Control xsi:type="Menu" id="RP.Menu">
+                  <Label resid="RP.Dropdown.Label" />
                   <Supertip>
-                    <Title resid="ReleasePlanner.Item2.Label" />
-                    <Description resid="ReleasePlanner.Item2.Tooltip" />
+                    <Title resid="RP.Dropdown.Label" />
+                    <Description resid="RP.Dropdown.Tooltip" />
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
-                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="16" resid="RP.TaskpaneButton.Icon16" />
+                    <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
+                    <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
                   </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>MyTaskPaneID2</TaskpaneId>
-                    <SourceLocation resid="ReleasePlanner.Taskpane2.Url" />
-                  </Action>
-                </Item>
-              
-              </Items>
-            </Control>
+                  <Items>
+                    <Item id="RP.Menu.Item1">
+                      <Label resid="RP.Item1.Label"/>
+                      <Supertip>
+                        <Title resid="RP.Item1.Label" />
+                        <Description resid="RP.Item1.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="RP.TaskpaneButton.Icon16" />
+                        <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
+                        <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>MyTaskPaneID1</TaskpaneId>
+                        <SourceLocation resid="RP.Taskpane1.Url" />
+                      </Action>
+                    </Item>
+                    <Item id="RP.Menu.Item2">
+                      <Label resid="RP.Item2.Label"/>
+                      <Supertip>
+                        <Title resid="RP.Item2.Label" />
+                        <Description resid="RP.Item2.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="RP.TaskpaneButton.Icon16" />
+                        <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
+                        <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>MyTaskPaneID2</TaskpaneId>
+                        <SourceLocation resid="RP.Taskpane2.Url" />
+                      </Action>
+                    </Item>
+                  </Items>
+                </Control>
 
               </Group>
-
               <!-- Label of your tab -->
               <!-- If validating with XSD it needs to be at the end, we might change this before release -->
-              <Label resid="ReleasePlanner.Tab1.TabLabel" />
+              <Label resid="RP.Tab1.TabLabel" />
             </CustomTab>
           </ExtensionPoint>
         </DesktopFormFactor>
@@ -175,36 +173,38 @@
     </Hosts>
     <Resources>
       <bt:Images>
-		<bt:Image id="ReleasePlanner.TaskpaneButton.Icon" DefaultValue="https://i.imgur.com/FkSShX9.png" />
-		<bt:Image id="ReleasePlanner.FunctionButton.Icon" DefaultValue="https://i.imgur.com/qDujiX0.png" />
+        <bt:Image id="RP.TaskpaneButton.Icon16" DefaultValue="https://localhost:4200/assets/icon-16.png" />
+        <bt:Image id="RP.TaskpaneButton.Icon32" DefaultValue="https://localhost:4200/assets/icon-32.png" />
+        <bt:Image id="RP.TaskpaneButton.Icon80" DefaultValue="https://localhost:4200/assets/icon-80.png" />
+		    <bt:Image id="RP.FunctionButton.Icon" DefaultValue="https://localhost:4200/assets/logo-filled.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="ReleasePlanner.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
-        <bt:Url id="ReleasePlanner.Taskpane1.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane.html" />
-        <bt:Url id="ReleasePlanner.Taskpane2.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane2.html" />
+        <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="RP.Taskpane1.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane.html" />
+        <bt:Url id="RP.Taskpane2.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane2.html" />
          <!--LearnMore URL currently not used -->
-        <bt:Url id="ReleasePlanner.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
+        <bt:Url id="RP.GetStarted.LearnMoreUrl" DefaultValue="https://help.RP.com">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="ReleasePlanner.FunctionButton.Label" DefaultValue="Execute Function" />
-        <bt:String id="ReleasePlanner.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
-        <bt:String id="ReleasePlanner.Dropdown.Label" DefaultValue="Dropdown" />
-        <bt:String id="ReleasePlanner.Item1.Label" DefaultValue="Show Taskpane 1" />
-        <bt:String id="ReleasePlanner.Item2.Label" DefaultValue="Show Taskpane 2" />
-        <bt:String id="ReleasePlanner.Tab1.GroupLabel" DefaultValue="Test Group" />
-         <bt:String id="ReleasePlanner.Tab1.TabLabel" DefaultValue="Test Tab" />
-         <bt:String id="ReleasePlanner.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
+        <bt:String id="RP.FunctionButton.Label" DefaultValue="Execute Function" />
+        <bt:String id="RP.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="RP.Dropdown.Label" DefaultValue="Dropdown" />
+        <bt:String id="RP.Item1.Label" DefaultValue="Show Taskpane 1" />
+        <bt:String id="RP.Item2.Label" DefaultValue="Show Taskpane 2" />
+        <bt:String id="RP.Tab1.GroupLabel" DefaultValue="RelPanner Group" />
+        <bt:String id="RP.Tab1.TabLabel" DefaultValue="RelPlanner Tab" />
+        <bt:String id="RP.GetStarted.Title" DefaultValue="RP add-in was succesfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>      
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="ReleasePlanner.FunctionButton.Tooltip" DefaultValue="Click to Execute Function" />
-        <bt:String id="ReleasePlanner.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
-        <bt:String id="ReleasePlanner.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
-        <bt:String id="ReleasePlanner.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
-        <bt:String id="ReleasePlanner.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
-          <bt:String id="ReleasePlanner.GetStarted.Description" DefaultValue="Get going by opening TEST TAB on the Ribbon">
+        <bt:String id="RP.FunctionButton.Tooltip" DefaultValue="Click to Execute Function" />
+        <bt:String id="RP.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="RP.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
+        <bt:String id="RP.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
+        <bt:String id="RP.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
+        <bt:String id="RP.GetStarted.Description" DefaultValue="Get going by opening the RP Tab on the Ribbon">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
         </bt:String>  
       </bt:LongStrings>
