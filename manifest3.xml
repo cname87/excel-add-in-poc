@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+<!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID -->
+  <Id>e504fb41-a92a-4526-b101-542f357b7acb</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>cname87</ProviderName>
+  <DefaultLocale>en-IE</DefaultLocale>
+   <!-- The display name of your add-in. Used on the store and various placed of the Office UI such as the add-ins dialog -->
+  <DisplayName DefaultValue="Test Sample" />
+  <Description DefaultValue="Test Description" />
+   <!--Icon for your add-in. Used on installation screens and the add-ins dialog -->
+  <IconUrl DefaultValue="http://localhost:4200/assets/icon-16.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:4200/assets/icon-64.png"/>
+  <SupportUrl DefaultValue="[Insert the URL of a page that provides support information for the app]" />
+  <AppDomains>
+    <!-- The task pane can access these exteral urls -->
+    <AppDomain>https://www.microsoft.com</AppDomain>
+  </AppDomains>
+
+  <!--BeginTaskpaneMode integration. Office 2013 and any client that doesn't understand commands will use this section.
+  This section will also be used if there are no VersionOverrides -->
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="http://localhost:4200/index.html" />
+  </DefaultSettings>
+  <!--EndTaskpaneMode integration -->
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <!--BeginAddinCommandsMode integration-->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">   
+    <Hosts>
+      <!-- Make sure the hosts you override match the hosts declared in the top section of the manifest -->
+      <Host xsi:type="Workbook">
+      	<!-- Form factor. Currenly only DesktopFormFactor is supported. We will add TabletFormFactor and PhoneFormFactor in the future-->
+        <DesktopFormFactor>
+          
+           <!--GetStarted information used on the callout that appears when installing the add-in. 
+            Ensure you have build 16.0.6769 or above for GetStarted section to work-->
+          <GetStarted>
+						<!--Title of the Getting Started callout. resid points to a ShortString resource -->
+						<Title resid="ReleasePlanner.GetStarted.Title"/>
+						
+						<!--Description of the Getting Started callout. resid points to a LongString resource -->
+						<Description resid="ReleasePlanner.GetStarted.Description"/>
+						
+						<!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL. 
+							resid points to a Url resource -->
+						<LearnMoreUrl resid="ReleasePlanner.GetStarted.LearnMoreUrl"/>
+					</GetStarted>
+          
+        	<!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called. 
+            Think of the FunctionFile as the "code behind" ExecuteFunction-->
+          <FunctionFile resid="ReleasePlanner.FunctionFile.Url" />
+
+          <!--PrimaryCommandSurface==Main Office Ribbon-->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+          	<!--Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab -->
+            <!-- Documentation includes all the IDs currently tested to work -->
+            <CustomTab id="ReleasePlanner.Tab1">
+				<!--Group ID-->
+              <Group id="ReleasePlanner.Tab1.Group1">
+              	 <!--Label for your group. resid must point to a ShortString resource -->
+                <Label resid="ReleasePlanner.Tab1.GroupLabel" />
+                <Icon>
+                <!-- Sample Todo: Each size needs its own icon resource or it will look distorted when resized -->
+                <!--Icons. Required sizes 16,31,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX -->
+                <!--Use PNG icons and remember that all URLs on the resources section must use HTTPS -->
+                  <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                </Icon>
+                
+                <!--Control. It can be of type "Button" or "Menu" -->
+                <Control xsi:type="Button" id="ReleasePlanner.FunctionButton">
+                <!--Label for your button. resid must point to a ShortString resource -->
+                  <Label resid="ReleasePlanner.FunctionButton.Label" />
+                  <Supertip>
+                  	 <!--ToolTip title. resid must point to a ShortString resource -->
+                    <Title resid="ReleasePlanner.FunctionButton.Label" />
+                     <!--ToolTip description. resid must point to a LongString resource -->
+                    <Description resid="ReleasePlanner.FunctionButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="ReleasePlanner.FunctionButton.Icon" />
+                    <bt:Image size="32" resid="ReleasePlanner.FunctionButton.Icon" />
+                    <bt:Image size="80" resid="ReleasePlanner.FunctionButton.Icon" />
+                  </Icon>
+                  <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFuncion or ShowTaskpane-->
+                  <!--Look at the FunctionFile.html page for reference on how to implement the function -->
+                  <Action xsi:type="ExecuteFunction">
+                  <!--Name of the function to call. This function needs to exist in the global DOM namespace of the function file-->
+                    <FunctionName>writeText</FunctionName>
+                  </Action>
+                </Control>
+
+                <Control xsi:type="Button" id="ReleasePlanner.TaskpaneButton">
+                  <Label resid="ReleasePlanner.TaskpaneButton.Label" />
+                  <Supertip>
+                    <Title resid="ReleasePlanner.TaskpaneButton.Label" />
+                    <Description resid="ReleasePlanner.TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>Button2Id1</TaskpaneId>
+                     <!--Provide a url resource id for the location that will be displayed on the task pane -->
+                    <SourceLocation resid="ReleasePlanner.Taskpane1.Url" />
+                  </Action>
+                </Control>
+            <!-- Menu example -->
+            <Control xsi:type="Menu" id="ReleasePlanner.Menu">
+              <Label resid="ReleasePlanner.Dropdown.Label" />
+              <Supertip>
+                <Title resid="ReleasePlanner.Dropdown.Label" />
+                <Description resid="ReleasePlanner.Dropdown.Tooltip" />
+              </Supertip>
+              <Icon>
+                <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+              </Icon>
+              <Items>
+                <Item id="ReleasePlanner.Menu.Item1">
+                  <Label resid="ReleasePlanner.Item1.Label"/>
+                  <Supertip>
+                    <Title resid="ReleasePlanner.Item1.Label" />
+                    <Description resid="ReleasePlanner.Item1.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>MyTaskPaneID1</TaskpaneId>
+                    <SourceLocation resid="ReleasePlanner.Taskpane1.Url" />
+                  </Action>
+                </Item>
+
+                <Item id="ReleasePlanner.Menu.Item2">
+                  <Label resid="ReleasePlanner.Item2.Label"/>
+                  <Supertip>
+                    <Title resid="ReleasePlanner.Item2.Label" />
+                    <Description resid="ReleasePlanner.Item2.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="32" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                    <bt:Image size="80" resid="ReleasePlanner.TaskpaneButton.Icon" />
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>MyTaskPaneID2</TaskpaneId>
+                    <SourceLocation resid="ReleasePlanner.Taskpane2.Url" />
+                  </Action>
+                </Item>
+              
+              </Items>
+            </Control>
+
+              </Group>
+
+              <!-- Label of your tab -->
+              <!-- If validating with XSD it needs to be at the end, we might change this before release -->
+              <Label resid="ReleasePlanner.Tab1.TabLabel" />
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+		<bt:Image id="ReleasePlanner.TaskpaneButton.Icon" DefaultValue="https://i.imgur.com/FkSShX9.png" />
+		<bt:Image id="ReleasePlanner.FunctionButton.Icon" DefaultValue="https://i.imgur.com/qDujiX0.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="ReleasePlanner.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="ReleasePlanner.Taskpane1.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane.html" />
+        <bt:Url id="ReleasePlanner.Taskpane2.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane2.html" />
+         <!--LearnMore URL currently not used -->
+        <bt:Url id="ReleasePlanner.GetStarted.LearnMoreUrl" DefaultValue="https://commandsimple.azurewebsites.net/GetStarted.html">
+        </bt:Url>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="ReleasePlanner.FunctionButton.Label" DefaultValue="Execute Function" />
+        <bt:String id="ReleasePlanner.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="ReleasePlanner.Dropdown.Label" DefaultValue="Dropdown" />
+        <bt:String id="ReleasePlanner.Item1.Label" DefaultValue="Show Taskpane 1" />
+        <bt:String id="ReleasePlanner.Item2.Label" DefaultValue="Show Taskpane 2" />
+        <bt:String id="ReleasePlanner.Tab1.GroupLabel" DefaultValue="Test Group" />
+         <bt:String id="ReleasePlanner.Tab1.TabLabel" DefaultValue="Test Tab" />
+         <bt:String id="ReleasePlanner.GetStarted.Title" DefaultValue="Simple add-in was succesfully loaded">
+          <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
+        </bt:String>      
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="ReleasePlanner.FunctionButton.Tooltip" DefaultValue="Click to Execute Function" />
+        <bt:String id="ReleasePlanner.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
+        <bt:String id="ReleasePlanner.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
+        <bt:String id="ReleasePlanner.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
+        <bt:String id="ReleasePlanner.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
+          <bt:String id="ReleasePlanner.GetStarted.Description" DefaultValue="Get going by opening TEST TAB on the Ribbon">
+          <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
+        </bt:String>  
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+
+</OfficeApp>

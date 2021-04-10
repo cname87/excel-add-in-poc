@@ -1,3 +1,5 @@
+/// <reference path="../node_modules/@types/office-js/index.d.ts" />
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -7,6 +9,12 @@ import { environment } from './environments/environment';
 if (environment.production) {
   enableProdMode();
 }
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// declare const Office: any;
+Office.initialize = reason => {
+  // document.getElementById('sideload-msg').style.display = 'none';
+  console.log('office is initialized');
+  // Bootstrap the app
+  platformBrowserDynamic()
+      .bootstrapModule(AppModule)
+      .catch(error => console.error(error));
+};
