@@ -11,7 +11,7 @@
    <!--Icon for your add-in. Used on installation screens and the add-ins dialog -->
   <IconUrl DefaultValue="https://localhost:4200/assets/icon-16.png" />
   <HighResolutionIconUrl DefaultValue="https://localhost:4200/assets/icon-64.png"/>
-  <SupportUrl DefaultValue="https://localhost:4200" />
+  <SupportUrl DefaultValue="https://www.microsoft.com" />
   <AppDomains>
     <!-- The task pane can access these exteral urls -->
     <AppDomain>https://www.microsoft.com</AppDomain>
@@ -179,11 +179,11 @@
 		    <bt:Image id="RP.FunctionButton.Icon" DefaultValue="https://localhost:4200/assets/logo-filled.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://localhost:4200/assets/FunctionFile.html" />
-        <bt:Url id="RP.Taskpane1.Url" DefaultValue="https://localhost:4200/assets/Taskpane.html" />
-        <bt:Url id="RP.Taskpane2.Url" DefaultValue="https://localhost:4200/assets/Taskpane2.html" />
+        <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://commandsimple.azurewebsites.net/FunctionFile.html" />
+        <bt:Url id="RP.Taskpane1.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane.html" />
+        <bt:Url id="RP.Taskpane2.Url" DefaultValue="https://commandsimple.azurewebsites.net/Taskpane2.html" />
          <!--LearnMore URL currently not used -->
-        <bt:Url id="RP.GetStarted.LearnMoreUrl" DefaultValue="https://localhost:4200">
+        <bt:Url id="RP.GetStarted.LearnMoreUrl" DefaultValue="https://help.RP.com">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
