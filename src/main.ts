@@ -1,9 +1,10 @@
-/* eslint-disable no-var */
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+
+import { writeText } from './functions';
 
 if (environment.production) {
   enableProdMode();
@@ -36,23 +37,5 @@ Office.onReady((info) => {
   console.log(`Office.js is now ready in ${info.host} on ${info.platform}`);
 });
 
-/* Reads data from current document selection and displays a notification */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-window.writeText = (event: any): void => {
-  console.log('writeText running');
-  Office.context.document.setSelectedDataAsync(
-    'ExecuteFunction Works with Prod Office.js Button ID=' + event.source.id,
-    (asyncResult) => {
-      const error = asyncResult.error;
-      if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-        console.log(`Error: ${error}`);
-        /* Show error. Upcoming displayDialog API will help here. */
-      } else {
-        console.log('Text written');
-        /* Show success. Upcoming displayDialog API will help here. */
-      }
-    },
-  );
-  /* Required: Call event.completed to let the platform know you are done processing */
-  event.completed();
-};
+/* Functions availabel to a UI-less command */
+window.writeText = writeText;
