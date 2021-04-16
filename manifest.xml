@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <!-- See https://github.com/OfficeDev/Office-Add-in-Commands-Samples for documentation-->
+  <!-- BeginBasicSettings: Add-in metadata, used for all versions of Office unless override provided -->
 <!--IMPORTANT! Id must be unique for your add-in. If you clone this manifest ensure that you change this id to your own GUID -->
   <Id>e504fb41-a92a-4526-b101-542f357b7acb</Id>
   <Version>1.0.0.0</Version>
@@ -13,7 +15,7 @@
   <HighResolutionIconUrl DefaultValue="https://localhost:4200/assets/icon-64.png"/>
   <SupportUrl DefaultValue="https://localhost:4200" />
   <AppDomains>
-    <!-- The task pane can access these exteral urls -->
+    <!-- The task pane can access these external urls -->
     <AppDomain>https://www.microsoft.com</AppDomain>
   </AppDomains>
 
@@ -30,28 +32,28 @@
   <Permissions>ReadWriteDocument</Permissions>
 
   <!--BeginAddinCommandsMode integration-->
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">   
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Hosts>
       <!-- Make sure the hosts you override match the hosts declared in the top section of the manifest -->
       <Host xsi:type="Workbook">
-      	<!-- Form factor. Currenly only DesktopFormFactor is supported. We will add TabletFormFactor and PhoneFormFactor in the future-->
+      	<!-- Form factor. Currently only DesktopFormFactor is supported. We will add TabletFormFactor and PhoneFormFactor in the future-->
         <DesktopFormFactor>
-          
-           <!--GetStarted information used on the callout that appears when installing the add-in. 
+
+           <!--GetStarted information used on the callout that appears when installing the add-in.
             Ensure you have build 16.0.6769 or above for GetStarted section to work-->
           <GetStarted>
 						<!--Title of the Getting Started callout. resid points to a ShortString resource -->
 						<Title resid="RP.GetStarted.Title"/>
-						
+
 						<!--Description of the Getting Started callout. resid points to a LongString resource -->
 						<Description resid="RP.GetStarted.Description"/>
-						
-						<!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL. 
+
+						<!--Not used right now but you need to provide a valid resource. We will add code in the future to consume this URL.
 							resid points to a Url resource -->
 						<LearnMoreUrl resid="RP.GetStarted.LearnMoreUrl"/>
 					</GetStarted>
-          
-        	<!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called. 
+
+        	<!--Function file is an html page that includes the javascript where functions for ExecuteAction will be called.
             Think of the FunctionFile as the "code behind" ExecuteFunction-->
           <FunctionFile resid="RP.FunctionFile.Url" />
 
@@ -72,7 +74,7 @@
                   <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
                   <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
                 </Icon>
-                
+
                 <!--Control. It can be of type "Button" or "Menu" -->
                 <Control xsi:type="Button" id="RP.FunctionButton">
                   <!--Label for your button. resid must point to a ShortString resource -->
@@ -88,7 +90,7 @@
                     <bt:Image size="32" resid="RP.FunctionButton.Icon" />
                     <bt:Image size="80" resid="RP.FunctionButton.Icon" />
                   </Icon>
-                  <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFuncion or ShowTaskpane-->
+                  <!--This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane-->
                   <!--Look at the FunctionFile.html page for reference on how to implement the function -->
                   <Action xsi:type="ExecuteFunction">
                     <!--Name of the function to call. This function needs to exist in the global DOM namespace of the function file-->
@@ -110,7 +112,7 @@
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>Button2ID1</TaskpaneId>
                       <!--Provide a url resource id for the location that will be displayed on the task pane -->
-                    <SourceLocation resid="RP.Taskpane1.Url" />
+                    <SourceLocation resid="RP.Taskpane.Url" />
                   </Action>
                 </Control>
 
@@ -140,7 +142,7 @@
                       </Icon>
                       <Action xsi:type="ShowTaskpane">
                         <TaskpaneId>MyTaskPaneID1</TaskpaneId>
-                        <SourceLocation resid="RP.Taskpane1.Url" />
+                        <SourceLocation resid="RP.Taskpane.Url" />
                       </Action>
                     </Item>
                     <Item id="RP.Menu.Item2">
@@ -154,9 +156,9 @@
                         <bt:Image size="32" resid="RP.TaskpaneButton.Icon32" />
                         <bt:Image size="80" resid="RP.TaskpaneButton.Icon80" />
                       </Icon>
-                      <Action xsi:type="ShowTaskpane">
-                        <TaskpaneId>MyTaskPaneID2</TaskpaneId>
-                        <SourceLocation resid="RP.Taskpane2.Url" />
+                      <Action xsi:type="ExecuteFunction">
+                        <!--Name of the function to call. This function needs to exist in the global DOM namespace of the function file-->
+                        <FunctionName>writeText</FunctionName>
                       </Action>
                     </Item>
                   </Items>
@@ -179,34 +181,34 @@
 		    <bt:Image id="RP.FunctionButton.Icon" DefaultValue="https://localhost:4200/assets/logo-filled.png" />
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://localhost:4200/assets/FunctionFile.html" />
-        <bt:Url id="RP.Taskpane1.Url" DefaultValue="https://localhost:4200/assets/index.html" />
-        <bt:Url id="RP.Taskpane2.Url" DefaultValue="https://localhost:4200/assets/Taskpane2.html" />
+        <!-- <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://localhost:4200/assets/FunctionFile.html" /> -->
+        <bt:Url id="RP.FunctionFile.Url" DefaultValue="https://localhost:4200/index.html" />
+        <bt:Url id="RP.Taskpane.Url" DefaultValue="https://localhost:4200/index.html" />
          <!--LearnMore URL currently not used -->
-        <bt:Url id="RP.GetStarted.LearnMoreUrl" DefaultValue="https://localhost:4200">
+        <bt:Url id="RP.GetStarted.LearnMoreUrl" DefaultValue="https://localhost:4200/index.html">
         </bt:Url>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="RP.FunctionButton.Label" DefaultValue="Execute Function" />
         <bt:String id="RP.TaskpaneButton.Label" DefaultValue="Show Taskpane" />
         <bt:String id="RP.Dropdown.Label" DefaultValue="Dropdown" />
-        <bt:String id="RP.Item1.Label" DefaultValue="Show Taskpane 1" />
-        <bt:String id="RP.Item2.Label" DefaultValue="Show Taskpane 2" />
+        <bt:String id="RP.Item1.Label" DefaultValue="Show Taskpane" />
+        <bt:String id="RP.Item2.Label" DefaultValue="Execute Function" />
         <bt:String id="RP.Tab1.GroupLabel" DefaultValue="RelPanner Group" />
         <bt:String id="RP.Tab1.TabLabel" DefaultValue="RelPlanner Tab" />
-        <bt:String id="RP.GetStarted.Title" DefaultValue="RP add-in was succesfully loaded">
+        <bt:String id="RP.GetStarted.Title" DefaultValue="RP add-in was successfully loaded">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
-        </bt:String>      
+        </bt:String>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="RP.FunctionButton.Tooltip" DefaultValue="Click to Execute Function" />
         <bt:String id="RP.TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane" />
         <bt:String id="RP.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu" />
-        <bt:String id="RP.Item1.Tooltip" DefaultValue="Click to Show Taskpane1" />
-        <bt:String id="RP.Item2.Tooltip" DefaultValue="Click to Show Taskpane2" />
+        <bt:String id="RP.Item1.Tooltip" DefaultValue="Click to Show Taskpane" />
+        <bt:String id="RP.Item2.Tooltip" DefaultValue="Click to Run Function" />
         <bt:String id="RP.GetStarted.Description" DefaultValue="Get going by opening the RP Tab on the Ribbon">
           <bt:Override Locale="ja-jp" Value="JA-JP Get Started Title" />
-        </bt:String>  
+        </bt:String>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

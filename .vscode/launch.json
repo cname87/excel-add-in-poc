@@ -4,7 +4,10 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    // https://localhost:4200/
+    /* NOTE:  In Office 2019 (not Office On The Web) you can attach a debugger from the task pane to debug the task pane html */
+
+    /* Starts server and connects to https://localhost:4200/
+    Note that add-ins do not run outside an Office application */
     {
       /* Starts Chrome and connects to localhost:4200.
       The frontend is served on localhost:4200, in a prelaunch task. */
@@ -40,7 +43,7 @@
       "showAsyncStacks": true,
       "sourceMaps": true,
     },
-    // Attach to Office Add-In
+    /* Start the server, start the Office application and then run this - should attach to the Office Add-In. Only works with local application e.g. Excel 2019, i.e. not Office on the Web */
     {
       "type": "office-addin",
       "request": "attach",
@@ -51,15 +54,22 @@
       "webRoot": "${workspaceFolder}",
       "timeout": 45000
     },
-    // Edge
+    // Start C:\Program Files (x86)\Microsoft\Edge\Application>msedge.exe --remote-debugging-port=2015 and this should attach but I could not get this to work */
     {
       "name": "Debug Office Add-in (Edge Chromium)",
       "type": "edge",
       "request": "attach",
       "useWebView": "advanced",
-      "port": 9229,
+      "port": 2015,
       "timeout": 600000,
-      "webRoot": "${workspaceRoot}/dist",
+      // Tell vscode where to find scripts on the server
+      "webRoot": "${workspaceFolder}/dist",
+      "pathMapping": {
+        "/": "${workspaceFolder}/dist/",
+      },
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceFolder}/*",
+      }
     },
   ],
 }
