@@ -4,7 +4,12 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import { writeText } from './functions';
+import {
+  formatRange,
+  getAndWriteAddress,
+  incrementPane,
+  writeNote,
+} from './functions';
 
 if (environment.production) {
   enableProdMode();
@@ -13,7 +18,13 @@ if (environment.production) {
 Office.initialize = (reason) => {
   /* If you need to initialize something you can do so here */
   console.log('Office is initialized');
-  console.log(`Reason is ${reason.toString()}`);
+
+  if (reason === Office.InitializationReason.Inserted) {
+    console.log(`The add-in was just inserted into the document`);
+  }
+  if (reason === Office.InitializationReason.DocumentOpened) {
+    console.log(`The add-in is already part of the document that was opened`);
+  }
 
   if (Office.context.requirements.isSetSupported('ExcelApi', '1.12')) {
     console.log('ExcelAp1 v1.12 is supported');
@@ -37,5 +48,8 @@ Office.onReady((info) => {
   console.log(`Office.js is now ready in ${info.host} on ${info.platform}`);
 });
 
-/* Functions availabel to a UI-less command */
-window.writeText = writeText;
+/* Functions available to a UI-less command */
+window.writeNote = writeNote;
+window.getAndWriteAddress = getAndWriteAddress;
+window.incrementPane = incrementPane;
+window.formatRange = formatRange;

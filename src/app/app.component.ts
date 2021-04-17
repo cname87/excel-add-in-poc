@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getAddress, writeTextToSelected } from '../functions';
 
 @Component({
   selector: 'app-root',
@@ -6,23 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ex2-angular';
+  title = 'Taskpane';
 
-  onClick = (_event: MouseEvent): void => {
-    this.writeText();
+  writeTextButton = (_event: MouseEvent): void => {
+    writeTextToSelected('Note written from Taskpane');
   };
 
-  /* Reads data from current document selection and displays a notification */
-  writeText = (): void => {
-    Office.context.document.setSelectedDataAsync('Data here', (asyncResult) => {
-      const error = asyncResult.error;
-      if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-        console.log(`Error: ${error}`);
-        /* Show error. Upcoming displayDialog API will help here. */
-      } else {
-        console.log('Text written');
-        /* Show success. Upcoming displayDialog API will help here. */
-      }
-    });
+  getAndWriteAddressButton = async (_event: MouseEvent): Promise<void> => {
+    const address = await getAddress();
+    if (address) {
+      writeTextToSelected(`The selected range is: ${address}`);
+    }
   };
 }

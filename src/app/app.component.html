@@ -1,12 +1,33 @@
-<h1>ex2-angular app is running!</h1>
+<div
+  class="ms-font-xxl"
+>
+  Test taskpane is running!
+</div>
 
 <button
     class="ms-Button ms-Button--primary"
     id="writeTextButton"
-    (click)="onClick($event)"
+    (click)="writeTextButton($event)"
 >
     <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span>
-    <span class="ms-Button-label">Insert Text</span>
-    <span class="ms-Button-description">Insert Text into Document</span>
+    <span class="ms-Button-label">Write Note</span>
+    <span class="ms-Button-description">
+      Write a note into the selected range
+    </span>
 </button>
-
+<br/>
+<button
+    class="ms-Button ms-Button--primary"
+    id="getAndWriteAddressButton"
+    (click)="getAndWriteAddressButton($event)"
+>
+    <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span>
+    <span class="ms-Button-label">Get Address</span>
+    <span class="ms-Button-description">Get selected range address</span>
+</button>
+<div
+  id="test"
+  class="ms-font-l"
+>
+  Starting Test Text
+</div>
